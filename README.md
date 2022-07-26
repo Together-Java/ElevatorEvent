@@ -70,7 +70,7 @@ On the left side is the overview with all sections and files contained in the ev
 
 ## How to submit
 
-The event runs for one week. Until then, please submit your solution per DM to any of the
+The event runs for two weeks. Until then, please submit your solution per DM to any of the
 moderators of Together Java.
 
 The easiest way to share your results is by just zipping the whole project folder.
