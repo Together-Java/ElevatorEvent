@@ -32,6 +32,42 @@ a fancy role and a shiny badge!
 
 ![role and badge](https://i.imgur.com/Uvg0WlA.png)
 
+## How to get started
+
+The event comes as a zip-file in form of a **EduTools course**,
+which is a plugin for IntelliJ.
+
+To participate in this event, you need:
+
+* [IntelliJ IDEA](https://www.jetbrains.com/idea/download) (the free Community Edition is more than enough)
+* [EduTools plugin](https://plugins.jetbrains.com/plugin/10081-edutools)
+* [Java 17](https://adoptium.net/) (or newer)
+* Download the event from [ElevatorEventTogetherJava.zip](https://github.com/Together-Java/ElevatorEvent/releases)
+
+There is also a special version of IntelliJ that comes with EduTools
+pre-installed already, [IntelliJ IDEA Edu](https://www.jetbrains.com/edu-products/download/#section=idea).
+
+Once you got that, import the zip-file as course into EduTools:
+
+![Start course](https://i.imgur.com/xc4BLJI.png)
+![Open course from disk](https://i.imgur.com/uHurpw1.png)
+![Select course zip](https://i.imgur.com/DoWwBl3.png)
+
+Make sure to select Java 17 and hit the **Start** button. 
+
+![Select Java 17 and start](https://i.imgur.com/yWM37Oo.png)
+
+IntelliJ now opens the event, it will look something like:
+
+![IDE](https://i.imgur.com/xJ906mT.png)
+
+On the right side you have the explanation that will guide you through the event.
+Together with buttons that allow you to check your code and advance to the next section.
+
+In the center is the code editor, where you will edit your solution.
+
+On the left side is the overview with all sections and files contained in the event.
+
 ## How to submit
 
 The event runs for one week. Until then, please submit your solution per DM to any of the
