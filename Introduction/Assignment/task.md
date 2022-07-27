@@ -19,7 +19,7 @@ Also, we created a visualization of the system to aid you in debugging your solu
 When you run the code, it will print an ASCII representation of the building,
 its humans and elevators, in each step. Here is an example:
 
-![building example](https://i.imgur.com/Gpq5nFA.png)
+![building example](https://i.imgur.com/sukCTyX.png)
 
 You see a building with 10 floors, viewed from the side. On the left, there are the corridors
 annotated with the amount of people currently waiting (**W**) for an elevator to arrive, and the
@@ -56,7 +56,7 @@ Simulation simulation = Simulation.createSingleElevatorSingleHumanSimulation();
 First and foremost, the main objective of the task is to ensure that everyone arrives at their destination.
 As simple as this sounds, this can already be a tough challenge on itself.
 
-To make your life easy, we abort your code in such a case, and you will see an error message:
+To make your life easy, we abort your code if it seems to be stuck, and you will see an error message:
 
 ```java
 if (stepCount >= 100_000) {

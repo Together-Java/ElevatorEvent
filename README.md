@@ -13,22 +13,21 @@ Junior developers at companies, called the _Elevator Test_.
 
 ## Prizes
 
-### Jetbrains All Product Pack
+### Jetbrains licenses
 
 Among all working submissions (elevators have to eventually transport humans to their destinations),
-we will randomly give away a month license for the [**All Products Pack**](https://www.jetbrains.com/all/)
-by **JetBrains**, sponsored by **Taz** (thanks 🎉).
+we will **randomly** give away up to **3 annual licenses** for any [**JetBrains product**](https://www.jetbrains.com/products/).
 
-![Taz#1072](https://i.imgur.com/N4cJdVF.png)
+![JetBrains logo](https://i.imgur.com/h6jXoNY.png)
 
-This will get you access to **all JetBrains desktop tools** including 11 IDEs, 3 extensions and 2 profilers.
+This will get you access to any of their 11 IDEs, 3 extensions and 2 profilers.
 
 ![all products pack](https://i.imgur.com/IL4dDs0.png)
 
-### Roles
+### Role
 
 Additionally, submissions will be graded and the top users are awarded with
-a fancy role and a shiny badge!
+the fancy '_Ruler of Elevators_' role and a shiny badge!
 
 ![role and badge](https://i.imgur.com/Uvg0WlA.png)
 
@@ -70,11 +69,15 @@ On the left side is the overview with all sections and files contained in the ev
 
 ## How to submit
 
-The event runs for two weeks. Until then, please submit your solution per DM to any of the
+Please submit your solution before the event ends per DM to any of the
 moderators of Together Java.
 
 The easiest way to share your results is by just zipping the whole project folder.
+
 We will accept any format, as long as it is clear what you have changed in the source code.
+
+While the event is still ongoing, please do not promote your solution openly in the server
+though to not ruin the event for others.
 
 ## Need help
 

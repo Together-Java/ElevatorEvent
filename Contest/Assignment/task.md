@@ -7,8 +7,13 @@ with the code base and what we changed.
 
 ### Base
 
-First, to give everyone the same starting point, we replaced the code
-you have previously written with the reference solution.
+First, to give everyone the same starting point and to allow people to skip the course,
+we replaced the code you have previously written with the reference solution.
+
+Your code is not lost though. If you want to continue working with your precious implementation,
+just open the files from the previous section in the project explorer and copy over the code.
+This is especially important when you spend a lot of time polishing during the course
+already and went the extra mile.
 
 ### Simulation
 
@@ -72,7 +77,7 @@ Also, the automated tests will most likely fail otherwise.
 First and foremost, the main objective of the assignment is to ensure that everyone arrives at their destination.
 As simple as this sounds, this can already be a tough challenge on itself.
 
-To make your life easy, we abort your code in such a case, and you will see an error message:
+To make your life easy, we abort your code if it seems to be stuck, and you will see an error message:
 
 ```java
 if (stepCount >= 100_000) {
@@ -155,9 +160,12 @@ here is a list of stuff that you can optionally implement or think about:
   and compare the performance. Try to also support a building with mixed elevator types.
 * Create a JavaFX or Swing GUI for the visualization, replacing the ASCII `View.java`.
 
+Of course, implementing any of these bonus tasks will also give you higher chances
+to win the contest 👌
+
 ## How to submit
 
-The event runs for two weeks. Until then, please submit your solution per DM to any of the
+Please submit your solution before the event ends per DM to any of the
 moderators of Together Java.
 
 The easiest way to share your results is by just zipping the whole project folder. Alternatively,
@@ -167,7 +175,12 @@ you can also just send us the source code for the files you changed. At minimum,
 * `Elevator.java`
 * `Human.java`
 
+You can also upload your files to _pastebin_ or the entire project to _GitHub_.
+
 We will accept any format, as long as it is clear what you have changed in the source code.
+
+While the event is still ongoing, please do not promote your solution openly in the server
+though to not ruin the event for others.
 
 ## Need help
 
