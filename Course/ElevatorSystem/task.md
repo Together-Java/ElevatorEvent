@@ -1,4 +1,4 @@
-In this section we will focus on creating the last core piece, the
+In this section, we will focus on creating the last core piece, the
 [ElevatorSystem.java](course://Course/ElevatorSystem/src/org/togetherjava/event/elevator/elevators/ElevatorSystem.java) class.
 
 This class will know all elevators and humans,

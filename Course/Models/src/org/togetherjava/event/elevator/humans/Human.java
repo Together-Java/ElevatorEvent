@@ -25,8 +25,8 @@ public final class Human {
      * It is supported that starting and destination floor are equals.
      * The human will then not travel with an elevator at all.
      *
-     * @param startingFloor    the floor the human currently stands at, must be greater equals 1
-     * @param destinationFloor the floor the human eventually wants to reach, must be greater equals 1
+     * @param startingFloor    the floor the human currently stands at, must be greater than or equal to 1
+     * @param destinationFloor the floor the human eventually wants to reach, must be greater than or equal to 1
      */
     public Human(int startingFloor, int destinationFloor) {
         if (startingFloor <= 0 || destinationFloor <= 0) {

@@ -54,7 +54,7 @@ Simulation simulation = Simulation.createSingleElevatorSingleHumanSimulation();
 #### Termination
 
 First and foremost, the main objective of the task is to ensure that everyone arrives at their destination.
-As simple as this sounds, this can already be a tough challenge on itself.
+As simple as this sounds, this can already be a tough challenge in itself.
 
 To make your life easy, we abort your code if it seems to be stuck, and you will see an error message:
 

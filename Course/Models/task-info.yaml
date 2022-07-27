@@ -16,33 +16,33 @@ files:
   - offset: 382
     length: 338
     placeholder_text: // TODO Implement fields
-  - offset: 1186
+  - offset: 1206
     length: 268
     placeholder_text: // TODO Implement
-  - offset: 1507
+  - offset: 1527
     length: 20
     placeholder_text: |-
       // TODO Implement
               throw new AssertionError("Not yet implemented.");
-  - offset: 1579
+  - offset: 1599
     length: 21
     placeholder_text: |-
       // TODO Implement
               throw new AssertionError("Not yet implemented.");
-  - offset: 1655
+  - offset: 1675
     length: 24
     placeholder_text: |-
       // TODO Implement
               throw new AssertionError("Not yet implemented.");
-  - offset: 1750
+  - offset: 1770
     length: 137
     placeholder_text: |-
       // TODO Implement
               throw new AssertionError("Not yet implemented.");
-  - offset: 1927
+  - offset: 1947
     length: 84
     placeholder_text: // TODO Implement
-  - offset: 2023
+  - offset: 2043
     length: 70
     placeholder_text: // NOTE Put any extra code here, then it carries over to the
       next task
@@ -52,30 +52,30 @@ files:
   - offset: 412
     length: 191
     placeholder_text: // TODO Implement fields
-  - offset: 1193
+  - offset: 1216
     length: 530
     placeholder_text: // TODO Implement
-  - offset: 1764
+  - offset: 1787
     length: 10
     placeholder_text: |-
       // TODO Implement
               throw new AssertionError("Not yet implemented.");
-  - offset: 1821
+  - offset: 1844
     length: 16
     placeholder_text: |-
       // TODO Implement
               throw new AssertionError("Not yet implemented.");
-  - offset: 1888
+  - offset: 1911
     length: 20
     placeholder_text: |-
       // TODO Implement
               throw new AssertionError("Not yet implemented.");
-  - offset: 1959
+  - offset: 1982
     length: 20
     placeholder_text: |-
       // TODO Implement
               throw new AssertionError("Not yet implemented.");
-  - offset: 1991
+  - offset: 2014
     length: 70
     placeholder_text: // NOTE Put any extra code here, then it carries over to the
       next task
