@@ -8,7 +8,7 @@ import java.util.StringJoiner;
 
 /**
  * A single human that starts at a given floor and wants to
- * reach a destination floor via using an elevator.
+ * reach a destination floor via an elevator.
  * <p>
  * The class mainly acts upon given elevator events it listens to,
  * for example requesting an elevator, eventually entering and exiting them.
@@ -26,7 +26,7 @@ public final class Human implements ElevatorListener {
     /**
      * Creates a new human.
      * <p>
-     * It is supported that starting and destination floor are equals.
+     * It is supported that starting and destination floors are equal.
      * The human will then not travel with an elevator at all.
      *
      * @param startingFloor    the floor the human currently stands at, must be greater than or equal to 1
@@ -68,8 +68,8 @@ public final class Human implements ElevatorListener {
         // TODO Implement. If the human is currently waiting for an elevator and
         //  this event represents arrival at the humans current floor, the human can now enter the
         //  elevator and request their actual destination floor. The state has to change to TRAVELING_WITH_ELEVATOR.
-        //  If the human is currently traveling with this elevator and the event represents the an
-        //  arrival at the humans destination floor, the human can now exit the elevator.
+        //  If the human is currently traveling with this elevator and the event represents
+        //  arrival at the human's destination floor, the human can now exit the elevator.
         System.out.println("Arrived-event received");
     }
 
