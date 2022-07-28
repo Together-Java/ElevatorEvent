@@ -34,7 +34,7 @@ as well as the unique ID of the elevator (at the bottom).
 #### Simulations
 
 To make it easy for you to debug your code, we also provide you with pre-created simulation
-setups in the `main` method, which you can select from, and fine-tine as you wish:
+setups in the `main` method, which you can select from, and fine-tune as you wish:
 
 ```java
 // Select a desired simulation for trying out your code.
