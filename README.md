@@ -16,7 +16,7 @@ Junior developers at companies, called the _Elevator Test_.
 ### Jetbrains licenses
 
 Among all working submissions (elevators have to eventually transport humans to their destinations),
-we will **randomly** give away up to **3 annual licenses** for any [**JetBrains product**](https://www.jetbrains.com/products/).
+we will **randomly** give away up to **2 annual licenses** for any [**JetBrains product**](https://www.jetbrains.com/products/).
 
 ![JetBrains logo](https://i.imgur.com/h6jXoNY.png)
 
