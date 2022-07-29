@@ -1,4 +1,4 @@
-![title](https://i.imgur.com/SyrNJ1J.png)
+![title](https://i.imgur.com/Of1ua1J.png)
 
 Welcome to the **Elevator Event** hosted by **Together Java**!
 

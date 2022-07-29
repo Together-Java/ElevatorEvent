@@ -32,7 +32,7 @@ final class PreviousHumanTest {
 
         Human.State currentState = human.getCurrentState();
 
-        assertEquals(Human.State.IDLE, currentState,
+        assertEquals("IDLE", currentState.name(),
                 "The getCurrentState() method of Human needs to return the current state, which is supposed to be IDLE for now.");
     }
 
