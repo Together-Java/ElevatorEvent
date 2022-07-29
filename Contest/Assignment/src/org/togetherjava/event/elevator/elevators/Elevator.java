@@ -20,8 +20,8 @@ public final class Elevator implements ElevatorPanel {
     /**
      * Creates a new elevator.
      *
-     * @param minFloor     the minimum floor that the elevator can serve, must be greater equals 1
-     * @param floorsServed the amount of floors served in total by this elevator, must be greater equals 2.
+     * @param minFloor     the minimum floor that the elevator can serve, must be greater than or equal to 1.
+     * @param floorsServed the amount of floors served in total by this elevator, must be greater than or equal to 2.
      *                     Together with the minFloor this forms a consecutive range of floors with no gaps in between.
      * @param currentFloor the floor the elevator starts at, must be within the defined range of floors served by the elevator
      */

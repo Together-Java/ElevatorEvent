@@ -75,7 +75,7 @@ Also, the automated tests will most likely fail otherwise.
 #### Termination
 
 First and foremost, the main objective of the assignment is to ensure that everyone arrives at their destination.
-As simple as this sounds, this can already be a tough challenge on itself.
+As simple as this sounds, this can already be a tough challenge in itself.
 
 To make your life easy, we abort your code if it seems to be stuck, and you will see an error message:
 
@@ -180,14 +180,14 @@ You can also upload your files to _pastebin_ or the entire project to _GitHub_.
 We will accept any format, as long as it is clear what you have changed in the source code.
 
 While the event is still ongoing, please do not promote your solution openly in the server
-though to not ruin the event for others.
+though, to not ruin the event for others.
 
 ## Need help
 
 If you have trouble solving the tasks, or something is just unclear to you,
 feel free to openly ask in the server.
 
-Besides being a contest, this is also meant as learning experience.
+Besides being a contest, this is also meant as a learning experience.
 So we will definitely provide you with assistance 👍
 
 Enjoy and happy coding 🙌

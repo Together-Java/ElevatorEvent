@@ -26,7 +26,7 @@ This will get you access to any of their 11 IDEs, 3 extensions and 2 profilers.
 
 ### Role
 
-Additionally, submissions will be graded and the top users are awarded with
+Additionally, submissions will be graded, and the top users are awarded with
 the fancy '_Ruler of Elevators_' role and a shiny badge!
 
 ![role and badge](https://i.imgur.com/Uvg0WlA.png)
@@ -41,14 +41,14 @@ The easiest way to share your results is by just zipping the whole project folde
 We will accept any format, as long as it is clear what you have changed in the source code.
 
 While the event is still ongoing, please do not promote your solution openly in the server
-though to not ruin the event for others.
+though, to not ruin the event for others.
 
 ## Need help
 
 If you have trouble solving the tasks, or something is just unclear to you,
 feel free to openly ask in the server.
 
-Besides being a contest, this is also meant as learning experience.
+Besides being a contest, this is also meant as a learning experience.
 So we will definitely provide you with assistance 👍
 
 Enjoy and happy coding 🙌

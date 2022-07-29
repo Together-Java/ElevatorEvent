@@ -34,7 +34,7 @@ as well as the unique ID of the elevator (at the bottom).
 #### Simulations
 
 To make it easy for you to debug your code, we also provide you with pre-created simulation
-setups in the `main` method, which you can select from, and fine-tine as you wish:
+setups in the `main` method, which you can select from, and fine-tune as you wish:
 
 ```java
 // Select a desired simulation for trying out your code.
@@ -54,7 +54,7 @@ Simulation simulation = Simulation.createSingleElevatorSingleHumanSimulation();
 #### Termination
 
 First and foremost, the main objective of the task is to ensure that everyone arrives at their destination.
-As simple as this sounds, this can already be a tough challenge on itself.
+As simple as this sounds, this can already be a tough challenge in itself.
 
 To make your life easy, we abort your code if it seems to be stuck, and you will see an error message:
 

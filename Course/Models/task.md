@@ -51,14 +51,14 @@ To ease debugging, it is highly recommended that you add a `toString` method to 
 
 ## Elevator
 
-The next class to focus at is [Elevator.java](course://Course/Models/src/org/togetherjava/event/elevator/elevators/Elevator.java).
+The next class to focus on is [Elevator.java](course://Course/Models/src/org/togetherjava/event/elevator/elevators/Elevator.java).
 
 Similar to `Human`, you will have to add a couple of fields, set up by the constructor.
 
 ### Floors
 
 An elevator has a range of floors that it can serve. The range is defined by the
-`minFloor` (at least greater equals `1`), ranging up to the last supported floor, given by
+`minFloor` (at least greater than or equals to `1`), ranging up to the last supported floor, given by
 `minFloor + floorsServed - 1`.
 
 In might sound complex at first, but is actually simple once we take a look at some examples.
@@ -81,7 +81,7 @@ Each elevator needs a unique ID. This ID is supposed to be returned by `getId()`
 
 Not only will this be useful for debugging later on, but this ID will also be displayed later
 in the visualization. For the best experience, it should be positive and start small.
-For example `0`, `1`, `2` and so on.
+For example, `0`, `1`, `2` and so on.
 
 How you implement this, is up to you.
 
