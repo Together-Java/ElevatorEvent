@@ -104,24 +104,28 @@ final class SanityTest {
             boolean exitedElevator =
                     previousState != Human.State.ARRIVED && currentState == Human.State.ARRIVED;
             if (exitedElevator) {
-                assertEquals(Human.State.TRAVELING_WITH_ELEVATOR, previousState,
-                        "When a human exits an elevator, their previous state must be traveling. But '%s' was in state %s.".formatted(
-                                human, previousState));
-
-                OptionalInt maybeElevatorId = previousHumanSnapshot.currentElevatorId();
-                assertTrue(maybeElevatorId.isPresent(), ERROR_MESSAGE_PRE
-                        + "When a human exits an elevator, they must have had a current elevator id previously. But '%s' does not.".formatted(
-                        human));
                 assertTrue(currentHumanSnapshot.currentElevatorId().isEmpty(), ERROR_MESSAGE_PRE
                         + "When a human exits an elevator, they must not have a current elevator id anymore. But '%s' has.".formatted(
                         human));
 
-                ElevatorSnapshot currentElevatorSnapshot =
-                        currentSnapshot.getElevatorSnapshot(maybeElevatorId.orElseThrow());
-                assertEquals(human.getDestinationFloor(), currentElevatorSnapshot.currentFloor(),
-                        ERROR_MESSAGE_PRE
-                                + "When a human exits an elevator, the elevator must be at the humans destination floor. But '%s' exited elevator with ID '%d' at a different floor.".formatted(
-                                human, maybeElevatorId.orElseThrow()));
+                // Only if the human actually travelled around
+                if (human.getStartingFloor() != human.getDestinationFloor()) {
+                    assertEquals(Human.State.TRAVELING_WITH_ELEVATOR, previousState,
+                            "When a human exits an elevator, their previous state must be traveling. But '%s' was in state %s.".formatted(
+                                    human, previousState));
+
+                    OptionalInt maybeElevatorId = previousHumanSnapshot.currentElevatorId();
+                    assertTrue(maybeElevatorId.isPresent(), ERROR_MESSAGE_PRE
+                            + "When a human exits an elevator, they must have had a current elevator id previously. But '%s' does not.".formatted(
+                            human));
+
+                    ElevatorSnapshot currentElevatorSnapshot =
+                            currentSnapshot.getElevatorSnapshot(maybeElevatorId.orElseThrow());
+                    assertEquals(human.getDestinationFloor(),
+                            currentElevatorSnapshot.currentFloor(), ERROR_MESSAGE_PRE
+                                    + "When a human exits an elevator, the elevator must be at the humans destination floor. But '%s' exited elevator with ID '%d' at a different floor.".formatted(
+                                    human, maybeElevatorId.orElseThrow()));
+                }
             }
 
             for (Elevator elevator : simulation.getElevators()) {
