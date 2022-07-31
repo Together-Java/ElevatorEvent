@@ -21,6 +21,8 @@ public interface ElevatorListener {
      *
      * @param elevatorPanel the system inside the elevator which provides information
      *                      about the elevator and can be used to request a destination floor.
+     * @implNote The default implementation fires this event from all elevators to all humans, not only to humans that are
+     * relevant (i.e. humans that can enter the elevator).
      */
     void onElevatorArrivedAtFloor(ElevatorPanel elevatorPanel);
 }
