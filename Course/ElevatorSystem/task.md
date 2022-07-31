@@ -91,7 +91,7 @@ The class is now ready, go ahead and try it out. Play with it in
 For example, you may write:
 
 ```java
-HumanSystem system = new HumanSystem();
+ElevatorSystem system = new ElevatorSystem();
 
 system.registerElevator(new Elevator(3, 4, 6));
 
