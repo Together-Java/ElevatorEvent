@@ -1,4 +1,5 @@
-Your first task will be to create the basic models for this project.
+Your first task will be to create the basic models for this project. Make sure to write your code inside the
+designated placeholder boxes, otherwise your code will not be saved when you progress to the next section.
 
 We will need a [Human.java](course://Course/Models/src/org/togetherjava/event/elevator/humans/Human.java)
 file, that represents the individual humans who want to use elevators to travel around.
