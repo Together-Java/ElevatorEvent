@@ -110,14 +110,14 @@ final class SanityTest {
 
                 // Only if the human actually travelled around
                 if (human.getStartingFloor() != human.getDestinationFloor()) {
-                    assertEquals(Human.State.TRAVELING_WITH_ELEVATOR, previousState,
-                            "When a human exits an elevator, their previous state must be traveling. But '%s' was in state %s.".formatted(
-                                    human, previousState));
-
                     OptionalInt maybeElevatorId = previousHumanSnapshot.currentElevatorId();
                     assertTrue(maybeElevatorId.isPresent(), ERROR_MESSAGE_PRE
                             + "When a human exits an elevator, they must have had a current elevator id previously. But '%s' does not.".formatted(
                             human));
+
+                    assertEquals(Human.State.TRAVELING_WITH_ELEVATOR, previousState,
+                            "When a human exits an elevator, their previous state must be traveling. But '%s' was in state %s.".formatted(
+                                    human, previousState));
 
                     ElevatorSnapshot currentElevatorSnapshot =
                             currentSnapshot.getElevatorSnapshot(maybeElevatorId.orElseThrow());
