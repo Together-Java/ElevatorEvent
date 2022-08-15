@@ -1,5 +1,5 @@
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.togetherjava.event.elevator.elevators.CommonElevator;
 import org.togetherjava.event.elevator.elevators.Elevator;
 import org.togetherjava.event.elevator.elevators.ElevatorSystem;
 import org.togetherjava.event.elevator.elevators.FloorPanelSystem;
@@ -41,7 +41,7 @@ final class PreviousElevatorSystemTest {
     void testMoveOneFloor() {
         ElevatorSystem system = new ElevatorSystem();
 
-        Supplier<Elevator> createAnyElevator = () -> new Elevator(1, 5, 2);
+        Supplier<Elevator> createAnyElevator = () -> new CommonElevator(1, 5, 2);
         List<Elevator> elevators = Stream.generate(createAnyElevator).limit(3).toList();
 
         List<ElevatorListener> listeners =

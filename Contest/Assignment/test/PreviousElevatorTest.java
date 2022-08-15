@@ -1,5 +1,5 @@
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.togetherjava.event.elevator.elevators.CommonElevator;
 import org.togetherjava.event.elevator.elevators.Elevator;
 import org.togetherjava.event.elevator.elevators.ElevatorPanel;
 
@@ -18,7 +18,7 @@ final class PreviousElevatorTest {
         int expectedFloorsServed = 4;
         int expectedCurrentFloor = 5;
         Elevator elevator =
-                new Elevator(expectedMinFloor, expectedFloorsServed, expectedCurrentFloor);
+                new CommonElevator(expectedMinFloor, expectedFloorsServed, expectedCurrentFloor);
 
         int actualMinFloor = elevator.getMinFloor();
         int actualFloorsServed = elevator.getFloorsServed();
@@ -42,7 +42,7 @@ final class PreviousElevatorTest {
 
         Set<Integer> elevatorIds = new HashSet<>();
         for (int i = 0; i < 500; i++) {
-            Elevator elevator = new Elevator(anyMinFloor, anyFloorsServed, anyCurrentFloor);
+            Elevator elevator = new CommonElevator(anyMinFloor, anyFloorsServed, anyCurrentFloor);
             int id = elevator.getId();
 
             assertFalse(elevatorIds.contains(id),

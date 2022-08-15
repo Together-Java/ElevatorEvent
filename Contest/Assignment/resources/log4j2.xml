@@ -1,0 +1,12 @@
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config">
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{DEFAULT} [%-5p] %t - %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>
