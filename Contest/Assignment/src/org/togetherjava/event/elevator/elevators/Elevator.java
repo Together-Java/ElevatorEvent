@@ -1,6 +1,6 @@
 package org.togetherjava.event.elevator.elevators;
 
-import java.util.StringJoiner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -16,6 +16,9 @@ public final class Elevator implements ElevatorPanel {
     private final int minFloor;
     private final int floorsServed;
     private int currentFloor;
+    public List<Integer> humansInside = new ArrayList<>();
+    public List<Integer> humansWaiting = new ArrayList<>();
+    private TravelDirection travelDirection;
 
     /**
      * Creates a new elevator.
@@ -38,6 +41,18 @@ public final class Elevator implements ElevatorPanel {
         this.currentFloor = currentFloor;
         this.floorsServed = floorsServed;
     }
+
+    public Optional<TravelDirection> getTravelDirection() {
+        return travelDirection != null ? Optional.of(travelDirection) : Optional.empty();
+    }
+
+    /**
+     * @param direction can be null if it stays still
+     */
+    public void setTravelDirection(TravelDirection direction) {
+        this.travelDirection = direction;
+    }
+
 
     @Override
     public int getId() {
@@ -63,7 +78,17 @@ public final class Elevator implements ElevatorPanel {
         //  itself requesting this elevator to eventually move to the given floor.
         //  The elevator is supposed to memorize the destination in a way that
         //  it can ensure to eventually reach it.
-        System.out.println("Request for destination floor received");
+        //System.out.println("Request for destination floor received");
+    }
+
+    @Override
+    public List<Integer> getWaitingHumans() {
+        return humansWaiting;
+    }
+
+    @Override
+    public List<Integer> getHumansInside() {
+        return humansInside;
     }
 
     public void moveOneFloor() {
@@ -76,7 +101,46 @@ public final class Elevator implements ElevatorPanel {
         //  meaning that the average time waiting (either in corridor or inside the elevator)
         //  is minimized across all humans.
         //  It is essential that this method updates the currentFloor field accordingly.
-        System.out.println("Request to move a floor received");
+        //System.out.println("Request to move a floor received");
+        if (humansWaiting.isEmpty() && !humansInside.isEmpty()) {
+            int floor = humansInside
+                    .stream()
+                    .min(getComparator())
+                    .orElseThrow(() -> new IllegalStateException("State shouldn't be reachable"));
+
+            TravelDirection travelDirection = TravelDirection.getTravelDirection(currentFloor, floor);
+
+            if (travelDirection == null) {
+                return;
+            }
+
+            switch (travelDirection) {
+                case UP -> currentFloor++;
+                case DOWN -> currentFloor--;
+            }
+
+        } else if (!humansWaiting.isEmpty()) {
+
+            int floor = humansWaiting
+                    .stream()
+                    .min(getComparator())
+                    .orElseThrow(() -> new IllegalStateException("State Shouldn't be possible"));
+
+            TravelDirection travelDirection = TravelDirection.getTravelDirection(currentFloor, floor);
+
+            if (travelDirection == null) {
+                return;
+            }
+
+            switch (travelDirection) {
+                case UP -> currentFloor++;
+                case DOWN -> currentFloor--;
+            }
+        }
+    }
+
+    private Comparator<Integer> getComparator() {
+        return Comparator.comparingInt((floorNumber) -> Math.abs(floorNumber - currentFloor));
     }
 
     @Override

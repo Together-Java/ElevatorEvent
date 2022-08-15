@@ -3,7 +3,9 @@ package org.togetherjava.event.elevator.elevators;
 import org.togetherjava.event.elevator.humans.ElevatorListener;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * System controlling all elevators of a building.
@@ -39,11 +41,32 @@ public final class ElevatorSystem implements FloorPanelSystem {
         //  The human can then enter the elevator and request their actual destination within the elevator.
         //  Ideally this has to select the best elevator among all which can reduce the time
         //  for the human spending waiting (either in corridor or in the elevator itself).
-        System.out.println("Request for elevator received");
+        //System.out.println("Request for elevator received");
+        Elevator elevatorToUse = elevators
+                .stream()
+                .sorted(getComparator(atFloor))
+                .filter(getElevatorFilter(desiredTravelDirection))
+                .findFirst()
+                .orElse(elevators
+                        .stream()
+                        .min(getComparator(atFloor))
+                        .orElseThrow(() -> new IllegalStateException("There are no Elevators")));
+
+        elevatorToUse.setTravelDirection(desiredTravelDirection);
+
+        elevatorToUse.humansWaiting.add(atFloor);
+    }
+
+    private Predicate<Elevator> getElevatorFilter(TravelDirection desiredTravelDirection) {
+        return (elevator1) -> elevator1.getTravelDirection().isEmpty() || elevator1.getTravelDirection().get() == desiredTravelDirection;
+    }
+
+    private Comparator<Elevator> getComparator(int atFloor) {
+        return Comparator.comparingInt((ele) -> Math.abs(atFloor - ele.getCurrentFloor()));
     }
 
     public void moveOneFloor() {
         elevators.forEach(Elevator::moveOneFloor);
-        elevators.forEach(elevator -> elevatorListeners.forEach(listener -> listener.onElevatorArrivedAtFloor(elevator)));
+        elevatorListeners.forEach((human) -> elevators.forEach(human::onElevatorArrivedAtFloor));
     }
 }
