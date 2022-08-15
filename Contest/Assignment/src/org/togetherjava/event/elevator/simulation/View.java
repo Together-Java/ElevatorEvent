@@ -101,7 +101,7 @@ public final class View {
                 .filter(Human.State.ARRIVED::equals)
                 .count();
         long humansWaiting = simulation.getHumans().stream()
-                .filter(human -> human.getStartingFloor() == floor)
+                .filter(human -> human.getCurrentFloor() == floor)
                 .map(Human::getCurrentState)
                 .filter(state -> state.equals(Human.State.IDLE) || state.equals(Human.State.WAITING_FOR_ELEVATOR))
                 .count();

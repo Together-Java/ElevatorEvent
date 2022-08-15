@@ -52,6 +52,28 @@ subprojects {
     }
 }
 
+project(':Contest-Assignment') {
+    def log4jVersion = '2.18.0'
+    def jbaVersion = '23.0.0'
+
+    dependencies {
+        annotationProcessor 'org.projectlombok:lombok:+'
+        compileOnly 'org.projectlombok:lombok:+'
+
+        annotationProcessor "org.jetbrains:annotations:$jbaVersion"
+        compileOnly "org.jetbrains:annotations:$jbaVersion"
+
+        implementation "org.apache.logging.log4j:log4j-core:$log4jVersion"
+        implementation "org.apache.logging.log4j:log4j-api:$log4jVersion"
+    }
+
+    sourceSets {
+        main {
+            resources.srcDir 'resources'
+        }
+    }
+}
+
 project(':util') {
     dependencies {
         testImplementation 'org.mockito:mockito-core:4.0.0'

@@ -1,12 +1,13 @@
 package org.togetherjava.event.elevator.simulation;
 
+import lombok.Getter;
 import org.togetherjava.event.elevator.humans.Human;
 
 import java.util.EnumMap;
 import java.util.Map;
 
 final class HumanStatistics {
-    private final Human human;
+    @Getter private final Human human;
     private final Map<Human.State, Long> stateToStepCount = new EnumMap<>(Human.State.class);
 
     HumanStatistics(Human human) {

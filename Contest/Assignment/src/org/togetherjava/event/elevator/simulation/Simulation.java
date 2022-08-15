@@ -1,27 +1,34 @@
 package org.togetherjava.event.elevator.simulation;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.togetherjava.event.elevator.elevators.CommonElevator;
 import org.togetherjava.event.elevator.elevators.Elevator;
 import org.togetherjava.event.elevator.elevators.ElevatorSystem;
 import org.togetherjava.event.elevator.humans.Human;
+import org.togetherjava.event.elevator.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-public final class Simulation {
-    private final List<Human> humans;
-    private final List<Elevator> elevators;
-    private final ElevatorSystem elevatorSystem;
+public class Simulation {
+    private static final Logger logger  = LogManager.getLogger();
+
+    protected final List<Human> humans;
+    protected final List<Elevator> elevators;
+    protected final ElevatorSystem elevatorSystem;
     private final View view;
-    private long stepCount;
-    private final List<HumanStatistics> humanStatistics;
+    protected long stepCount;
+    protected final List<HumanStatistics> humanStatistics;
 
     public static Simulation createSingleElevatorSingleHumanSimulation() {
-        return new Simulation(List.of(new Elevator(1, 10, 5)),
+        return new Simulation(List.of(new CommonElevator(1, 10, 5)),
                 List.of(new Human(1, 10)));
     }
 
@@ -31,8 +38,8 @@ public final class Simulation {
 
         return new Simulation(
                 List.of(
-                        new Elevator(minFloor, floorsServed, 1),
-                        new Elevator(minFloor, floorsServed, 6)),
+                        new CommonElevator(minFloor, floorsServed, 1),
+                        new CommonElevator(minFloor, floorsServed, 6)),
                 List.of(
                         new Human(1, 2),
                         new Human(1, 5),
@@ -46,14 +53,18 @@ public final class Simulation {
     }
 
     public static Simulation createRandomSimulation(long seed, int amountOfElevators, int amountOfHumans, int floorsServed) {
-        System.out.println("Seed for random simulation is: " + seed);
+        return createRandomSimulation(seed, amountOfElevators, amountOfHumans, floorsServed, Simulation::new);
+    }
+
+    public static <S extends Simulation> S createRandomSimulation(long seed, int amountOfElevators, int amountOfHumans, int floorsServed, SimulationFactory<S> factory) {
+        logger.info("Seed for random simulation is: " + seed);
         Random random = new Random(seed);
 
         int minFloor = 1;
 
-        List<Elevator> elevators = Stream.generate(() -> {
+        List<? extends Elevator> elevators = Stream.generate(() -> {
             int currentFloor = minFloor + random.nextInt(floorsServed);
-            return new Elevator(minFloor, floorsServed, currentFloor);
+            return new CommonElevator(minFloor, floorsServed, currentFloor);
         }).limit(amountOfElevators).toList();
 
         List<Human> humans = Stream.generate(() -> {
@@ -62,10 +73,14 @@ public final class Simulation {
             return new Human(startingFloor, destinationFloor);
         }).limit(amountOfHumans).toList();
 
-        return new Simulation(elevators, humans);
+        return factory.createSimulation(elevators, humans);
     }
 
-    public Simulation(List<Elevator> elevators, List<Human> humans) {
+    interface SimulationFactory<S extends Simulation> {
+        S createSimulation(List<? extends Elevator> elevators, List<Human> humans);
+    }
+
+    public Simulation(List<? extends Elevator> elevators, List<Human> humans) {
         this.elevators = new ArrayList<>(elevators);
         this.humans = new ArrayList<>(humans);
 
@@ -73,7 +88,7 @@ public final class Simulation {
         this.elevators.forEach(elevatorSystem::registerElevator);
         this.humans.forEach(elevatorSystem::registerElevatorListener);
 
-        humanStatistics = this.humans.stream().map(HumanStatistics::new).toList();
+        humanStatistics = this.humans.stream().map(HumanStatistics::new).collect(Collectors.toCollection(() -> new ArrayList<>(humans.size())));
         view = new View(this);
     }
 
@@ -91,20 +106,20 @@ public final class Simulation {
     }
 
     public void start() {
-        elevatorSystem.ready();
+        LogUtils.measure("Ready", elevatorSystem::ready);
     }
 
     public void step() {
         elevatorSystem.moveOneFloor();
-
-        humanStatistics.forEach(HumanStatistics::step);
+        LogUtils.measure("Statistics update", () -> humanStatistics.forEach(HumanStatistics::step));
         stepCount++;
     }
 
     public boolean isDone() {
-        return humans.stream()
-                .map(Human::getCurrentState)
-                .allMatch(Human.State.ARRIVED::equals);
+//        return humans.stream()
+//                .map(Human::getCurrentState)
+//                .allMatch(Human.State.ARRIVED::equals);
+        return !elevatorSystem.hasActivePassengers();
     }
 
     public long getStepCount() {
@@ -151,5 +166,18 @@ public final class Simulation {
 
         long medianPercentage = 100 * medianSteps / stepCount;
         return (int) medianPercentage;
+    }
+
+    public void printCurrentStatistics() {
+        logger.trace(() -> humanStatistics.stream()
+                .collect(Collectors.toMap((HumanStatistics stat) -> stat.getHuman().getCurrentState(), s -> 1, Integer::sum)));
+    }
+
+    public boolean shouldPrintSummary() {
+        return elevators.size() <= 100 && humans.size() <= 100;
+    }
+
+    public boolean shouldPrint() {
+        return elevatorSystem.getFloorAmount() <= 10 && elevators.size() <= 20;
     }
 }
