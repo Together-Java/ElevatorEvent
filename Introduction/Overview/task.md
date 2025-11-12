@@ -59,12 +59,12 @@ Enjoy and happy coding 🙌
 
 In case you encounter an error message, such as:
 
-![Cause: error: invalid source release: 17](https://i.imgur.com/xrT39xi.png)
+![Cause: error: invalid source release: 25](https://i.imgur.com/xrT39xi.png)
 
 Go to your Gradle settings (you can find them on the right, or directly in Intellij Settings):
 
 ![gradle settings](https://i.imgur.com/7ECw8Jw.png)
 
-and select a JDK 17 instead of `#JAVA_INTERNAL`:
+and select a JDK 25 instead of `#JAVA_INTERNAL`:
 
 ![select version](https://i.imgur.com/h1FFXYn.png)

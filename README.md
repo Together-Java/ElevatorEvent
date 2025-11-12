@@ -42,7 +42,7 @@ To participate in this event, you need:
 
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/download) (the free Community Edition is more than enough)
 * [EduTools plugin](https://plugins.jetbrains.com/plugin/10081-edutools)
-* [Java 17](https://adoptium.net/) (or newer)
+* [Java 25](https://adoptium.net/) (or newer)
 * Download the event from [ElevatorEventTogetherJava.zip](https://github.com/Together-Java/ElevatorEvent/releases)
 
 There is also a special version of IntelliJ that comes with EduTools
@@ -54,9 +54,9 @@ Once you got that, import the zip-file as course into EduTools:
 ![Open course from disk](https://i.imgur.com/uHurpw1.png)
 ![Select course zip](https://i.imgur.com/DoWwBl3.png)
 
-Make sure to select Java 17 and hit the **Start** button. 
+Make sure to select Java 25 and hit the **Start** button. 
 
-![Select Java 17 and start](https://i.imgur.com/yWM37Oo.png)
+![Select Java 25 and start](https://i.imgur.com/yWM37Oo.png)
 
 IntelliJ now opens the event, it will look something like:
 
@@ -97,12 +97,12 @@ Enjoy and happy coding 🙌
 
 In case you encounter an error message, such as:
 
-![Cause: error: invalid source release: 17](https://i.imgur.com/xrT39xi.png)
+![Cause: error: invalid source release: 25](https://i.imgur.com/xrT39xi.png)
 
 Go to your Gradle settings (you can find them on the right, or directly in Intellij Settings):
 
 ![gradle settings](https://i.imgur.com/7ECw8Jw.png)
 
-and select a JDK 17 instead of `#JAVA_INTERNAL`:
+and select a JDK 25 instead of `#JAVA_INTERNAL`:
 
 ![select version](https://i.imgur.com/h1FFXYn.png)
