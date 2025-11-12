@@ -35,28 +35,28 @@ the fancy '_Ruler of Elevators_' role and a shiny badge!
 
 ## How to get started
 
-The event comes as a zip-file in form of a **EduTools course**,
+The event comes as a zip-file in form of a **JetBrains Academy course**,
 which is a plugin for IntelliJ.
 
 To participate in this event, you need:
 
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/download) (the free Community Edition is more than enough)
-* [EduTools plugin](https://plugins.jetbrains.com/plugin/10081-edutools)
+* [JetBrains Academy plugin](https://plugins.jetbrains.com/plugin/10081-jetbrains-academy)
 * [Java 25](https://adoptium.net/) (or newer)
 * Download the event from [ElevatorEventTogetherJava.zip](https://github.com/Together-Java/ElevatorEvent/releases)
 
-There is also a special version of IntelliJ that comes with EduTools
-pre-installed already, [IntelliJ IDEA Edu](https://www.jetbrains.com/edu-products/download/#section=idea).
+There is also a special version of IntelliJ that comes with JetBrains Academy
+pre-installed already, [IntelliJ IDEA Edu](https://www.jetbrains.com/edu-products/download/?section=idea).
 
-Once you got that, import the zip-file as course into EduTools:
+Once you got that, import the zip-file as course into JetBrains Academy:
 
-![Start course](https://i.imgur.com/xc4BLJI.png)
-![Open course from disk](https://i.imgur.com/uHurpw1.png)
+![Start course](https://i.imgur.com/nek0xjS.png)
+![Open course from disk](https://i.imgur.com/NpBmz8u.png)
 ![Select course zip](https://i.imgur.com/DoWwBl3.png)
 
 Make sure to select Java 25 and hit the **Start** button. 
 
-![Select Java 25 and start](https://i.imgur.com/yWM37Oo.png)
+![Select Java 25 and start](https://i.imgur.com/HDiuNwc.png)
 
 IntelliJ now opens the event, it will look something like:
 
