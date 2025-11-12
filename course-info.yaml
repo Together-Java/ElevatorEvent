@@ -1,10 +1,17 @@
 type: marketplace
 title: Elevator-Event-Together-Java
 language: English
-summary: This is the Elevator Event, hosted by Together Java. Use at least Java 17.
+summary: "This is the Elevator Event, hosted by Together Java. Use at least Java 17."
 programming_language: Java
 programming_language_version: 17
 content:
-- Introduction
-- Course
-- Contest
+  - Introduction
+  - Course
+  - Contest
+additional_files:
+  - name: .idea/inspectionProfiles/Project_Default.xml
+  - name: LICENSE
+  - name: README.md
+  - name: build.gradle
+  - name: settings.gradle
+yaml_version: 5

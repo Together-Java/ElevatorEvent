@@ -1,81 +1,81 @@
 type: edu
 files:
-- name: test/HumanTest.java
-  visible: true
-- name: test/ElevatorTest.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/Main.java
-  visible: true
-  placeholders:
-  - offset: 462
-    length: 410
-    placeholder_text: System.out.println("Hello World!");
-- name: src/org/togetherjava/event/elevator/humans/Human.java
-  visible: true
-  placeholders:
-  - offset: 382
-    length: 338
-    placeholder_text: // TODO Implement fields
-  - offset: 1206
-    length: 268
-    placeholder_text: // TODO Implement
-  - offset: 1527
-    length: 20
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-  - offset: 1599
-    length: 21
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-  - offset: 1675
-    length: 24
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-  - offset: 1770
-    length: 137
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-  - offset: 1947
-    length: 84
-    placeholder_text: // TODO Implement
-  - offset: 2043
-    length: 70
-    placeholder_text: // NOTE Put any extra code here, then it carries over to the
-      next task
-- name: src/org/togetherjava/event/elevator/elevators/Elevator.java
-  visible: true
-  placeholders:
-  - offset: 412
-    length: 191
-    placeholder_text: // TODO Implement fields
-  - offset: 1216
-    length: 530
-    placeholder_text: // TODO Implement
-  - offset: 1787
-    length: 10
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-  - offset: 1844
-    length: 16
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-  - offset: 1911
-    length: 20
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-  - offset: 1982
-    length: 20
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-  - offset: 2014
-    length: 70
-    placeholder_text: // NOTE Put any extra code here, then it carries over to the
-      next task
+  - name: test/HumanTest.java
+    visible: true
+  - name: test/ElevatorTest.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/Main.java
+    visible: true
+    placeholders:
+      - offset: 462
+        length: 410
+        placeholder_text: System.out.println("Hello World!");
+  - name: src/org/togetherjava/event/elevator/humans/Human.java
+    visible: true
+    placeholders:
+      - offset: 382
+        length: 338
+        placeholder_text: // TODO Implement fields
+      - offset: 1206
+        length: 268
+        placeholder_text: // TODO Implement
+      - offset: 1527
+        length: 20
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+      - offset: 1599
+        length: 21
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+      - offset: 1675
+        length: 24
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+      - offset: 1770
+        length: 137
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+      - offset: 1947
+        length: 84
+        placeholder_text: // TODO Implement
+      - offset: 2043
+        length: 70
+        placeholder_text: "// NOTE Put any extra code here, then it carries over to the\
+      \ next task"
+  - name: src/org/togetherjava/event/elevator/elevators/Elevator.java
+    visible: true
+    placeholders:
+      - offset: 412
+        length: 191
+        placeholder_text: // TODO Implement fields
+      - offset: 1216
+        length: 530
+        placeholder_text: // TODO Implement
+      - offset: 1787
+        length: 10
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+      - offset: 1844
+        length: 16
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+      - offset: 1911
+        length: 20
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+      - offset: 1982
+        length: 20
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+      - offset: 2014
+        length: 70
+        placeholder_text: "// NOTE Put any extra code here, then it carries over to the\
+      \ next task"

@@ -1,34 +1,34 @@
 type: edu
 files:
-- name: src/org/togetherjava/event/elevator/Main.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/humans/ElevatorListener.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/humans/Human.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/elevators/Elevator.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/elevators/ElevatorSystem.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/elevators/ElevatorPanel.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/elevators/FloorPanelSystem.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/elevators/TravelDirection.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/simulation/HumanStatistics.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/simulation/Simulation.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/simulation/View.java
-  visible: true
-- name: test/SimulationTest.java
-  visible: true
-- name: test/SanityTest.java
-  visible: true
-- name: test/PreviousHumanTest.java
-  visible: true
-- name: test/PreviousElevatorTest.java
-  visible: true
-- name: test/PreviousElevatorSystemTest.java
-  visible: true
+  - name: src/org/togetherjava/event/elevator/Main.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/humans/ElevatorListener.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/humans/Human.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/elevators/Elevator.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/elevators/ElevatorSystem.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/elevators/ElevatorPanel.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/elevators/FloorPanelSystem.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/elevators/TravelDirection.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/simulation/HumanStatistics.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/simulation/Simulation.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/simulation/View.java
+    visible: true
+  - name: test/SimulationTest.java
+    visible: true
+  - name: test/SanityTest.java
+    visible: true
+  - name: test/PreviousHumanTest.java
+    visible: true
+  - name: test/PreviousElevatorTest.java
+    visible: true
+  - name: test/PreviousElevatorSystemTest.java
+    visible: true

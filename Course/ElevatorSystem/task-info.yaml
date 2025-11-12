@@ -1,237 +1,221 @@
 type: edu
 files:
-- name: src/org/togetherjava/event/elevator/Main.java
-  visible: true
-  placeholders:
-  - offset: 462
-    length: 410
-    placeholder_text: System.out.println("Hello World!");
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/Main.java
-      placeholder: 1
-      is_visible: true
-- name: src/org/togetherjava/event/elevator/humans/Human.java
-  visible: true
-  placeholders:
-  - offset: 507
-    length: 28
-    placeholder_text: /* implement the ElevatorListener interface */
-  - offset: 542
-    length: 338
-    placeholder_text: // TODO Implement fields
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/humans/Human.java
-      placeholder: 1
-      is_visible: true
-  - offset: 1366
-    length: 268
-    placeholder_text: // TODO Implement
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/humans/Human.java
-      placeholder: 2
-      is_visible: true
-  - offset: 1687
-    length: 20
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/humans/Human.java
-      placeholder: 3
-      is_visible: true
-  - offset: 1759
-    length: 21
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/humans/Human.java
-      placeholder: 4
-      is_visible: true
-  - offset: 1835
-    length: 24
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/humans/Human.java
-      placeholder: 5
-      is_visible: true
-  - offset: 1871
-    length: 142
-    placeholder_text: // TODO Put the code for onElevatorSystemReady here
-  - offset: 2019
-    length: 141
-    placeholder_text: // TODO Put the code for onElevatorArrivedAtFloor here
-  - offset: 2225
-    length: 137
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/humans/Human.java
-      placeholder: 6
-      is_visible: true
-  - offset: 2402
-    length: 84
-    placeholder_text: // TODO Implement
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/humans/Human.java
-      placeholder: 7
-      is_visible: true
-  - offset: 2498
-    length: 70
-    placeholder_text: // NOTE Put any extra code here, then it carries over to the
-      next task
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/humans/Human.java
-      placeholder: 8
-      is_visible: true
-- name: src/org/togetherjava/event/elevator/elevators/Elevator.java
-  visible: true
-  placeholders:
-  - offset: 405
-    length: 25
-    placeholder_text: /* implement ElevatorPanel here */
-  - offset: 437
-    length: 191
-    placeholder_text: // TODO Implement fields
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/elevators/Elevator.java
-      placeholder: 1
-      is_visible: true
-  - offset: 1238
-    length: 530
-    placeholder_text: // TODO Implement
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/elevators/Elevator.java
-      placeholder: 2
-      is_visible: true
-  - offset: 1823
-    length: 10
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/elevators/Elevator.java
-      placeholder: 3
-      is_visible: true
-  - offset: 1880
-    length: 16
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/elevators/Elevator.java
-      placeholder: 4
-      is_visible: true
-  - offset: 1947
-    length: 20
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/elevators/Elevator.java
-      placeholder: 5
-      is_visible: true
-  - offset: 2032
-    length: 20
-    placeholder_text: |-
-      // TODO Implement
-              throw new AssertionError("Not yet implemented.");
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/elevators/Elevator.java
-      placeholder: 6
-      is_visible: true
-  - offset: 2064
-    length: 149
-    placeholder_text: // TODO Put the code for requestDestinationFloor here
-  - offset: 2219
-    length: 98
-    placeholder_text: // TODO Put code for moveOneFloor here
-  - offset: 2323
-    length: 70
-    placeholder_text: // NOTE Put any extra code here, then it carries over to the
-      next task
-    dependency:
-      lesson: Course
-      task: Models
-      file: src/org/togetherjava/event/elevator/elevators/Elevator.java
-      placeholder: 7
-      is_visible: true
-- name: test/ElevatorTest.java
-  visible: true
-- name: test/ElevatorSystemTest.java
-  visible: true
-- name: test/HumanTest.java
-  visible: true
-- name: test/PreviousElevatorTest.java
-  visible: true
-- name: test/PreviousHumanTest.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/elevators/ElevatorSystem.java
-  visible: true
-  placeholders:
-  - offset: 491
-    length: 28
-    placeholder_text: /* implement FloorPanelSystem here */
-  - offset: 526
-    length: 139
-    placeholder_text: // TODO Implement fields
-  - offset: 729
-    length: 24
-    placeholder_text: // TODO Implement
-  - offset: 839
-    length: 32
-    placeholder_text: // TODO Implement
-  - offset: 1037
-    length: 76
-    placeholder_text: // TODO Implement
-  - offset: 1125
-    length: 163
-    placeholder_text: // TODO Put code for requestElevator here
-  - offset: 1331
-    length: 165
-    placeholder_text: // Implement
-  - offset: 1508
-    length: 70
-    placeholder_text: // NOTE Put any extra code here, then it carries over to the
-      next task
-- name: src/org/togetherjava/event/elevator/humans/ElevatorListener.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/elevators/FloorPanelSystem.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/elevators/ElevatorPanel.java
-  visible: true
-- name: src/org/togetherjava/event/elevator/elevators/TravelDirection.java
-  visible: true
+  - name: src/org/togetherjava/event/elevator/Main.java
+    visible: true
+    placeholders:
+      - offset: 462
+        length: 410
+        placeholder_text: System.out.println("Hello World!");
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/Main.java
+          placeholder: 1
+  - name: src/org/togetherjava/event/elevator/humans/Human.java
+    visible: true
+    placeholders:
+      - offset: 507
+        length: 28
+        placeholder_text: /* implement the ElevatorListener interface */
+      - offset: 542
+        length: 338
+        placeholder_text: // TODO Implement fields
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/humans/Human.java
+          placeholder: 1
+      - offset: 1366
+        length: 268
+        placeholder_text: // TODO Implement
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/humans/Human.java
+          placeholder: 2
+      - offset: 1687
+        length: 20
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/humans/Human.java
+          placeholder: 3
+      - offset: 1759
+        length: 21
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/humans/Human.java
+          placeholder: 4
+      - offset: 1835
+        length: 24
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/humans/Human.java
+          placeholder: 5
+      - offset: 1871
+        length: 142
+        placeholder_text: // TODO Put the code for onElevatorSystemReady here
+      - offset: 2019
+        length: 141
+        placeholder_text: // TODO Put the code for onElevatorArrivedAtFloor here
+      - offset: 2225
+        length: 137
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/humans/Human.java
+          placeholder: 6
+      - offset: 2402
+        length: 84
+        placeholder_text: // TODO Implement
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/humans/Human.java
+          placeholder: 7
+      - offset: 2498
+        length: 70
+        placeholder_text: "// NOTE Put any extra code here, then it carries over to the\
+      \ next task"
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/humans/Human.java
+          placeholder: 8
+  - name: src/org/togetherjava/event/elevator/elevators/Elevator.java
+    visible: true
+    placeholders:
+      - offset: 405
+        length: 25
+        placeholder_text: /* implement ElevatorPanel here */
+      - offset: 437
+        length: 191
+        placeholder_text: // TODO Implement fields
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/elevators/Elevator.java
+          placeholder: 1
+      - offset: 1238
+        length: 530
+        placeholder_text: // TODO Implement
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/elevators/Elevator.java
+          placeholder: 2
+      - offset: 1823
+        length: 10
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/elevators/Elevator.java
+          placeholder: 3
+      - offset: 1880
+        length: 16
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/elevators/Elevator.java
+          placeholder: 4
+      - offset: 1947
+        length: 20
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/elevators/Elevator.java
+          placeholder: 5
+      - offset: 2032
+        length: 20
+        placeholder_text: |-
+          // TODO Implement
+                  throw new AssertionError("Not yet implemented.");
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/elevators/Elevator.java
+          placeholder: 6
+      - offset: 2064
+        length: 149
+        placeholder_text: // TODO Put the code for requestDestinationFloor here
+      - offset: 2219
+        length: 98
+        placeholder_text: // TODO Put code for moveOneFloor here
+      - offset: 2323
+        length: 70
+        placeholder_text: "// NOTE Put any extra code here, then it carries over to the\
+      \ next task"
+        dependency:
+          lesson: Course
+          task: Models
+          file: src/org/togetherjava/event/elevator/elevators/Elevator.java
+          placeholder: 7
+  - name: test/ElevatorTest.java
+    visible: true
+  - name: test/ElevatorSystemTest.java
+    visible: true
+  - name: test/HumanTest.java
+    visible: true
+  - name: test/PreviousElevatorTest.java
+    visible: true
+  - name: test/PreviousHumanTest.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/elevators/ElevatorSystem.java
+    visible: true
+    placeholders:
+      - offset: 491
+        length: 28
+        placeholder_text: /* implement FloorPanelSystem here */
+      - offset: 526
+        length: 139
+        placeholder_text: // TODO Implement fields
+      - offset: 729
+        length: 24
+        placeholder_text: // TODO Implement
+      - offset: 839
+        length: 32
+        placeholder_text: // TODO Implement
+      - offset: 1037
+        length: 76
+        placeholder_text: // TODO Implement
+      - offset: 1125
+        length: 163
+        placeholder_text: // TODO Put code for requestElevator here
+      - offset: 1331
+        length: 165
+        placeholder_text: // Implement
+      - offset: 1508
+        length: 70
+        placeholder_text: "// NOTE Put any extra code here, then it carries over to the\
+      \ next task"
+  - name: src/org/togetherjava/event/elevator/humans/ElevatorListener.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/elevators/FloorPanelSystem.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/elevators/ElevatorPanel.java
+    visible: true
+  - name: src/org/togetherjava/event/elevator/elevators/TravelDirection.java
+    visible: true
