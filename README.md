@@ -43,7 +43,7 @@ To participate in this event, you need:
 * [IntelliJ IDEA](https://www.jetbrains.com/idea/download) (the free Community Edition is more than enough)
 * [JetBrains Academy plugin](https://plugins.jetbrains.com/plugin/10081-jetbrains-academy)
 * [Java 25](https://adoptium.net/) (or newer)
-* Download the event from [ElevatorEventTogetherJava.zip](https://github.com/Together-Java/ElevatorEvent/releases)
+* Download the event from [Elevator_Event_Together_Java.zip](https://github.com/Together-Java/ElevatorEvent/releases)
 
 There is also a special version of IntelliJ that comes with JetBrains Academy
 pre-installed already, [IntelliJ IDEA Edu](https://www.jetbrains.com/edu-products/download/?section=idea).
