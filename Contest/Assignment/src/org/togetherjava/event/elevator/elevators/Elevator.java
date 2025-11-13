@@ -1,5 +1,6 @@
 package org.togetherjava.event.elevator.elevators;
 
+import java.util.Hashtable;
 import java.util.StringJoiner;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -14,8 +15,11 @@ public final class Elevator implements ElevatorPanel {
 
     private final int id;
     private final int minFloor;
+    private final int maxFloor;
     private final int floorsServed;
     private int currentFloor;
+
+    Hashtable<Integer, TravelDirection> requests = new Hashtable<>();
 
     /**
      * Creates a new elevator.
@@ -35,6 +39,7 @@ public final class Elevator implements ElevatorPanel {
 
         this.id = NEXT_ID.getAndIncrement();
         this.minFloor = minFloor;
+        this.maxFloor = minFloor + floorsServed-1;
         this.currentFloor = currentFloor;
         this.floorsServed = floorsServed;
     }
@@ -47,7 +52,9 @@ public final class Elevator implements ElevatorPanel {
     public int getMinFloor() {
         return minFloor;
     }
-
+    public int getMaxFloor() {
+        return maxFloor;
+    }
     public int getFloorsServed() {
         return floorsServed;
     }
@@ -63,9 +70,34 @@ public final class Elevator implements ElevatorPanel {
         //  itself requesting this elevator to eventually move to the given floor.
         //  The elevator is supposed to memorize the destination in a way that
         //  it can ensure to eventually reach it.
-        System.out.println("Request for destination floor received");
-    }
+        if(destinationFloor==currentFloor)
+            return;
+        TravelDirection travelDirection=getTravelDirection(destinationFloor);
+        requests.put(destinationFloor,travelDirection);
 
+    }
+    private TravelDirection getTravelDirection(int floor)
+    {
+        if(floor>currentFloor)
+            return TravelDirection.UP;
+        else
+            return TravelDirection.DOWN;
+    }
+    private int getClosestFloor()
+    {
+        int smallestFloorDifference=floorsServed,smallestFloor=-1;
+        for (Integer floor : requests.keySet()) {
+            if(floor==null)
+                continue;
+            int floorDifference=Math.abs(floor-currentFloor);
+            if(floorDifference<smallestFloorDifference)
+            {
+                smallestFloorDifference=floorDifference;
+                smallestFloor=floor;
+            }
+        }
+        return smallestFloor;
+    }
     public void moveOneFloor() {
         // TODO Implement. Essentially there are three possibilities:
         //  - move up one floor
@@ -76,7 +108,36 @@ public final class Elevator implements ElevatorPanel {
         //  meaning that the average time waiting (either in corridor or inside the elevator)
         //  is minimized across all humans.
         //  It is essential that this method updates the currentFloor field accordingly.
-        System.out.println("Request to move a floor received");
+        int closestFloor=getClosestFloor();
+        if(closestFloor==-1)
+        {
+            return;
+        }
+        if(closestFloor<currentFloor)
+        {
+            if(currentFloor==minFloor)
+            {
+                requests.remove(closestFloor);
+                moveOneFloor();
+                return;
+            }
+            --currentFloor;
+        }
+        else if(closestFloor>currentFloor)
+        {
+            if(currentFloor==maxFloor)
+            {
+                requests.remove(closestFloor);
+                moveOneFloor();
+                return;
+            }
+            ++currentFloor;
+        }
+        else
+        {
+            requests.remove(closestFloor);
+            moveOneFloor();
+        }
     }
 
     @Override

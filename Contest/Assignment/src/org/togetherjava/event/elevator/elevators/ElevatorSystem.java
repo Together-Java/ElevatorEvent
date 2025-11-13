@@ -13,8 +13,8 @@ import java.util.List;
  * the system can be made ready using {@link #ready()}.
  */
 public final class ElevatorSystem implements FloorPanelSystem {
-    private final List<Elevator> elevators = new ArrayList<>();
-    private final List<ElevatorListener> elevatorListeners = new ArrayList<>();
+    private final List<Elevator> elevators= new ArrayList<>();
+    private final List<ElevatorListener> elevatorListeners= new ArrayList<>();
 
     public void registerElevator(Elevator elevator) {
         elevators.add(elevator);
@@ -31,6 +31,28 @@ public final class ElevatorSystem implements FloorPanelSystem {
         elevatorListeners.forEach(listener -> listener.onElevatorSystemReady(this));
     }
 
+    private boolean isInRange(int floor,Elevator elevator)
+    {
+        return floor>=elevator.getMinFloor() && floor<=elevator.getMaxFloor();
+    }
+    private Elevator getClosestElevator(int atFloor)
+    {
+        int minimumFloorDifference=Math.abs(elevators.get(0).getCurrentFloor()-atFloor);
+        if(minimumFloorDifference==0)
+            return elevators.get(0);
+        Elevator closestElevator=elevators.get(0);
+        for(Elevator elevator:elevators)
+        {
+            int currentFloor=elevator.getCurrentFloor();
+            int floorDifference=Math.abs(currentFloor-atFloor);
+            if(floorDifference<minimumFloorDifference&&isInRange(currentFloor,elevator))
+            {
+                minimumFloorDifference=floorDifference;
+                closestElevator=elevator;
+            }
+        }
+        return closestElevator;
+    }
     @Override
     public void requestElevator(int atFloor, TravelDirection desiredTravelDirection) {
         // TODO Implement. This represents a human standing in the corridor,
@@ -39,7 +61,9 @@ public final class ElevatorSystem implements FloorPanelSystem {
         //  The human can then enter the elevator and request their actual destination within the elevator.
         //  Ideally this has to select the best elevator among all which can reduce the time
         //  for the human spending waiting (either in corridor or in the elevator itself).
-        System.out.println("Request for elevator received");
+        Elevator chosenElevator= getClosestElevator(atFloor);
+        if(chosenElevator!=null)
+            chosenElevator.requestDestinationFloor(atFloor);
     }
 
     public void moveOneFloor() {
