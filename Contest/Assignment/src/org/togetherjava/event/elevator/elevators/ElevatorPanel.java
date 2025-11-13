@@ -1,5 +1,7 @@
 package org.togetherjava.event.elevator.elevators;
 
+import java.util.List;
+
 /**
  * The system inside an elevator which provides information about the elevator and can be
  * used to request a destination floor.
@@ -25,4 +27,8 @@ public interface ElevatorPanel {
      * @param destinationFloor the desired destination, must be within the range served by this elevator
      */
     void requestDestinationFloor(int destinationFloor);
+
+    List<Integer> getWaitingHumans();
+
+    List<Integer> getHumansInside();
 }
