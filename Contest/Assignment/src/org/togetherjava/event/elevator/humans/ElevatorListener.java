@@ -6,10 +6,13 @@ import org.togetherjava.event.elevator.elevators.FloorPanelSystem;
 /**
  * Listeners to elevator events. This is mostly interesting for
  * humans who can then request elevators to move to desired floors.
+ * This interface represents all the actions that a human will be interested in.
  */
 public interface ElevatorListener {
     /**
-     * Fired when the elevator system is ready to receive requests. Elevators can now move.
+     * Fired when the elevator system is ready (elevators are created)
+     * to receive requests. Elevators can now move.
+     *
      *
      * @param floorPanelSystem the system in the corridor that allows
      *                         requesting elevators to the current floor

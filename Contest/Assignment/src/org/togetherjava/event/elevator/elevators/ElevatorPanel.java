@@ -3,6 +3,7 @@ package org.togetherjava.event.elevator.elevators;
 /**
  * The system inside an elevator which provides information about the elevator and can be
  * used to request a destination floor.
+ * This interface represents all the actions that an elevator will want to expose to humans.
  */
 public interface ElevatorPanel {
     /**

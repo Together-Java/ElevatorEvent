@@ -2,6 +2,8 @@ package org.togetherjava.event.elevator.elevators;
 
 /**
  * The system in corridors that allows requesting elevators to the current floor.
+ * This interface represents the action that the elevator system itself exposes to humans
+ * standing on the corridor.
  */
 public interface FloorPanelSystem {
     /**
