@@ -3,6 +3,7 @@ package org.togetherjava.event.elevator.simulation;
 import org.togetherjava.event.elevator.elevators.Elevator;
 import org.togetherjava.event.elevator.elevators.ElevatorSystem;
 import org.togetherjava.event.elevator.humans.Human;
+import org.togetherjava.event.elevator.humans.HumanArrivedListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,12 +13,13 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
-public final class Simulation {
+public final class Simulation implements HumanArrivedListener {
     private final List<Human> humans;
     private final List<Elevator> elevators;
     private final ElevatorSystem elevatorSystem;
     private final View view;
     private long stepCount;
+    private long humanTravelingCount;
     private final List<HumanStatistics> humanStatistics;
 
     public static Simulation createSingleElevatorSingleHumanSimulation() {
@@ -71,10 +73,15 @@ public final class Simulation {
 
         elevatorSystem = new ElevatorSystem();
         this.elevators.forEach(elevatorSystem::registerElevator);
-        this.humans.forEach(elevatorSystem::registerElevatorListener);
+        this.humans.forEach(human -> {
+            elevatorSystem.registerElevatorListener(human);
+            human.addListener(this);
+        });
 
         humanStatistics = this.humans.stream().map(HumanStatistics::new).toList();
         view = new View(this);
+
+        this.humanTravelingCount = humans.size();
     }
 
     public void startAndExecuteUntilDone(int stepLimit) {
@@ -102,9 +109,20 @@ public final class Simulation {
     }
 
     public boolean isDone() {
-        return humans.stream()
-                .map(Human::getCurrentState)
-                .allMatch(Human.State.ARRIVED::equals);
+        return humanTravelingCount == 0;
+    }
+
+    public void addHuman(Human human) {
+        if (isDone()) {
+            throw new SimulationFinishedException("Can't add new human after simulation is finished!");
+        }
+        humans.add(human);
+        elevatorSystem.registerElevatorListener(human);
+        human.addListener(this);
+        human.onElevatorSystemReady(elevatorSystem);
+        if (human.getCurrentState() != Human.State.ARRIVED) {
+            humanTravelingCount++;
+        }
     }
 
     public long getStepCount() {
@@ -136,12 +154,12 @@ public final class Simulation {
 
         System.out.println("Median time spend per state:");
         for (Human.State state : Human.State.values()) {
-            int averagePercentage = getAverageTimePercentageSpendForState(state);
-            System.out.printf("\t%s: %d%%%n", state, averagePercentage);
+            double averagePercentage = getAverageTimePercentageSpendForState(state);
+            System.out.printf("\t%s: %f%%%n", state, averagePercentage);
         }
     }
 
-    public int getAverageTimePercentageSpendForState(Human.State state) {
+    public double getAverageTimePercentageSpendForState(Human.State state) {
         LongStream sortedSteps = humanStatistics.stream()
                 .mapToLong(stats -> stats.stepsForState(state))
                 .sorted();
@@ -149,7 +167,13 @@ public final class Simulation {
                 ? (long) sortedSteps.skip(humanStatistics.size() / 2 - 1).limit(2).average().orElseThrow()
                 : sortedSteps.skip(humanStatistics.size() / 2).findFirst().orElseThrow();
 
-        long medianPercentage = 100 * medianSteps / stepCount;
-        return (int) medianPercentage;
+        return (double) (100 * medianSteps) / stepCount;
+    }
+
+    @Override
+    public synchronized void onHumanArrived(Human human) {
+        if (humanTravelingCount > 0) {
+            humanTravelingCount--; //We trust that the human hasnt notified us twice.
+        }
     }
 }

@@ -1,6 +1,6 @@
 package org.togetherjava.event.elevator.elevators;
 
-import java.util.StringJoiner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -16,6 +16,12 @@ public final class Elevator implements ElevatorPanel {
     private final int minFloor;
     private final int floorsServed;
     private int currentFloor;
+
+    private final List<Integer> floorRequests = new ArrayList<>();
+
+    public List<Integer> getFloorRequests() {
+        return Collections.unmodifiableList(floorRequests);
+    }
 
     /**
      * Creates a new elevator.
@@ -52,18 +58,39 @@ public final class Elevator implements ElevatorPanel {
         return floorsServed;
     }
 
+    public int getTopFloor() {
+        return minFloor + floorsServed - 1;
+    }
+
     @Override
     public int getCurrentFloor() {
         return currentFloor;
     }
 
     @Override
-    public void requestDestinationFloor(int destinationFloor) {
+    public synchronized void requestDestinationFloor(int destinationFloor) {
         // TODO Implement. This represents a human or the elevator system
         //  itself requesting this elevator to eventually move to the given floor.
         //  The elevator is supposed to memorize the destination in a way that
         //  it can ensure to eventually reach it.
-        System.out.println("Request for destination floor received");
+        if (floorRequests.contains(destinationFloor)) {
+            return;
+        }
+        floorRequests.add(destinationFloor);
+    }
+
+    public void incrementFloorByOne() {
+        if (currentFloor+1 > this.getTopFloor()) {
+            return;
+        }
+        currentFloor++;
+    }
+
+    public void decrementFloorByOne() {
+        if (currentFloor-1 < minFloor) {
+            return;
+        }
+        currentFloor--;
     }
 
     public void moveOneFloor() {
@@ -76,7 +103,23 @@ public final class Elevator implements ElevatorPanel {
         //  meaning that the average time waiting (either in corridor or inside the elevator)
         //  is minimized across all humans.
         //  It is essential that this method updates the currentFloor field accordingly.
-        System.out.println("Request to move a floor received");
+        if (floorRequests.isEmpty()) {
+            return; //stand still
+        }
+
+        //if we the target is up, we go up, if it is down, we go down
+        if (currentFloor < floorRequests.getFirst()) { //first come, first served, for now...
+            this.incrementFloorByOne();
+        } else if (currentFloor > floorRequests.getFirst()) {
+            this.decrementFloorByOne();
+        }
+
+        //if we have arrived at our floor, or we already are there, we remove the request
+        if (currentFloor == floorRequests.getFirst()) {
+            synchronized (this) {
+                floorRequests.removeFirst();
+            }
+        }
     }
 
     @Override

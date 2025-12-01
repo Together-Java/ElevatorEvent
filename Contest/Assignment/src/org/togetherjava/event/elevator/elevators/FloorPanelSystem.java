@@ -4,6 +4,7 @@ package org.togetherjava.event.elevator.elevators;
  * The system in corridors that allows requesting elevators to the current floor.
  */
 public interface FloorPanelSystem {
+
     /**
      * Requests an elevator to move to the given floor to pick up a human.
      *
@@ -14,4 +15,6 @@ public interface FloorPanelSystem {
      * requesting that an elevator comes to pick them up for travel into the given direction.
      */
     void requestElevator(int atFloor, TravelDirection desiredTravelDirection);
+    void requestElevator(Elevator bestElevator, int atFloor);
+    Elevator bestElevator(int atFloor, TravelDirection desiredTravelDirection);
 }

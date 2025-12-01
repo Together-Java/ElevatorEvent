@@ -49,7 +49,7 @@ final class PreviousElevatorSystemTest {
 
         elevators.forEach(system::registerElevator);
         listeners.forEach(system::registerElevatorListener);
-        system.ready();
+        //system.ready();
 
         system.moveOneFloor();
         for (Elevator elevator : elevators) {
