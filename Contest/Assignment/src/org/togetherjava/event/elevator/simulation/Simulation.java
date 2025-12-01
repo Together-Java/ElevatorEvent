@@ -82,7 +82,6 @@ public final class Simulation {
 
         while (!isDone()) {
             step();
-
             if (stepCount >= stepLimit) {
                 throw new IllegalStateException("Simulation aborted. All humans should have arrived"
                         + " by now, but they did not. There is likely a bug in your code.");

@@ -25,4 +25,11 @@ public interface ElevatorPanel {
      * @param destinationFloor the desired destination, must be within the range served by this elevator
      */
     void requestDestinationFloor(int destinationFloor);
+
+    /**
+     * Shows the "advertised" direction where the elevator is heading so passengers know whether to board.
+     *
+     * @return a TravelDirection that represents the direction this elevator is headed
+     */
+    TravelDirection getAdvertisedDirection();
 }
