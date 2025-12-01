@@ -1,8 +1,12 @@
 package org.togetherjava.event.elevator.humans;
 
+import org.togetherjava.event.elevator.elevators.Elevator;
 import org.togetherjava.event.elevator.elevators.ElevatorPanel;
 import org.togetherjava.event.elevator.elevators.FloorPanelSystem;
+import org.togetherjava.event.elevator.elevators.TravelDirection;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.OptionalInt;
 import java.util.StringJoiner;
 
@@ -17,12 +21,13 @@ public final class Human implements ElevatorListener {
     private State currentState;
     private final int startingFloor;
     private final int destinationFloor;
+    private Elevator bestElevator = null;
     /**
      * If the human is currently inside an elevator, this is its unique ID.
      * Otherwise, this is {@code null} to indicate that the human is currently on the corridor.
      */
     private Integer currentEnteredElevatorId;
-
+    private final List<HumanArrivedListener> listeners = new ArrayList<>();
     /**
      * Creates a new human.
      * <p>
@@ -43,6 +48,20 @@ public final class Human implements ElevatorListener {
         currentState = State.IDLE;
     }
 
+    public void addListener(HumanArrivedListener listener) {
+        this.listeners.add(listener);
+    }
+
+    private void setArrived() {
+        if (currentState == State.ARRIVED) {
+            return; //dont want to notify listeners again for our arrival
+        }
+        this.currentState = State.ARRIVED;
+        for (var listener : listeners) {
+            listener.onHumanArrived(this);
+        }
+    }
+
     public State getCurrentState() {
         return currentState;
     }
@@ -60,7 +79,20 @@ public final class Human implements ElevatorListener {
         // TODO Implement. The system is now ready and the human should leave
         //  their initial IDLE state, requesting an elevator by clicking on the buttons of
         //  the floor panel system. The human will now enter the WAITING_FOR_ELEVATOR state.
-        System.out.println("Ready-event received");
+        if (this.getCurrentState() != State.IDLE) {
+            return;
+        }
+        this.currentState = State.WAITING_FOR_ELEVATOR;
+        if (destinationFloor == startingFloor) {
+            return;
+        }
+        bestElevator = floorPanelSystem.bestElevator(destinationFloor, destinationFloor > startingFloor ? TravelDirection.UP : TravelDirection.DOWN);
+        if(bestElevator.getCurrentFloor() == startingFloor) {
+            this.currentEnteredElevatorId = bestElevator.getId();
+            this.currentState = State.TRAVELING_WITH_ELEVATOR;
+            return;
+        }
+        floorPanelSystem.requestElevator(bestElevator,startingFloor);
     }
 
     @Override
@@ -70,7 +102,23 @@ public final class Human implements ElevatorListener {
         //  elevator and request their actual destination floor. The state has to change to TRAVELING_WITH_ELEVATOR.
         //  If the human is currently traveling with this elevator and the event represents
         //  arrival at the human's destination floor, the human can now exit the elevator.
-        System.out.println("Arrived-event received");
+        if (this.getCurrentState() == State.ARRIVED ||
+                (this.getDestinationFloor() != elevatorPanel.getCurrentFloor() && this.getStartingFloor() != elevatorPanel.getCurrentFloor())) {
+            return;
+        }
+        //are we on our destination floor or is our elevator at our destination floor? hop out
+        if (startingFloor == destinationFloor || (destinationFloor == elevatorPanel.getCurrentFloor() && this.currentEnteredElevatorId != null && this.currentEnteredElevatorId == elevatorPanel.getId())) {
+            this.currentEnteredElevatorId = null;
+            this.setArrived();
+            return;
+        }
+        assert bestElevator != null;
+        //elevator's in our floor and we arent traveling? hop in
+        if (startingFloor == elevatorPanel.getCurrentFloor() && this.getCurrentState() != State.TRAVELING_WITH_ELEVATOR) {
+            this.currentState = State.TRAVELING_WITH_ELEVATOR;
+            this.currentEnteredElevatorId = elevatorPanel.getId();
+            elevatorPanel.requestDestinationFloor(destinationFloor);
+        }
     }
 
     public OptionalInt getCurrentEnteredElevatorId() {

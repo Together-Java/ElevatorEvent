@@ -3,7 +3,9 @@ package org.togetherjava.event.elevator.elevators;
 import org.togetherjava.event.elevator.humans.ElevatorListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * System controlling all elevators of a building.
@@ -28,7 +30,40 @@ public final class ElevatorSystem implements FloorPanelSystem {
      * Upon calling this, the system is ready to receive elevator requests. Elevators may now start moving.
      */
     public void ready() {
-        elevatorListeners.forEach(listener -> listener.onElevatorSystemReady(this));
+        elevatorListeners.parallelStream().forEach(listener -> listener.onElevatorSystemReady(this));
+    }
+
+    public static int floorAndElevatorDistance(int floor, Elevator elevator) {
+        return Math.abs(elevator.getCurrentFloor()-floor);
+    }
+    @Override
+    public Elevator bestElevator(int atFloor, TravelDirection desiredTravelDirection) {
+        assert !elevators.isEmpty();
+        Elevator bestElevator = elevators.getFirst();
+        if (elevators.size() == 1) {
+            return bestElevator;
+        }
+        Set<Elevator> candidates = new HashSet<>(); //we find all the closest candidates
+        candidates.add(bestElevator);
+        for (var elevator : elevators) {
+            if (floorAndElevatorDistance(atFloor, elevator) < floorAndElevatorDistance(atFloor, candidates.stream().findAny().get())) {
+                candidates.clear();
+                candidates.add(elevator);
+            } else if (floorAndElevatorDistance(atFloor, elevator) == floorAndElevatorDistance(atFloor, candidates.stream().findAny().get())) {
+                candidates.add(elevator);
+            }
+        }
+        bestElevator = candidates.stream().findAny().get();
+        for (var elevator : candidates) {
+            if (elevator.getFloorRequests().size() < bestElevator.getFloorRequests().size()) { //out of the closest candidates, we chose the one with the least traffic
+                bestElevator = elevator;
+            }
+        }
+        return bestElevator;
+    }
+
+    public void requestElevator(Elevator elevator, int atFloor) {
+        elevator.requestDestinationFloor(atFloor);
     }
 
     @Override
@@ -39,11 +74,11 @@ public final class ElevatorSystem implements FloorPanelSystem {
         //  The human can then enter the elevator and request their actual destination within the elevator.
         //  Ideally this has to select the best elevator among all which can reduce the time
         //  for the human spending waiting (either in corridor or in the elevator itself).
-        System.out.println("Request for elevator received");
+        bestElevator(atFloor, desiredTravelDirection).requestDestinationFloor(atFloor);
     }
 
     public void moveOneFloor() {
-        elevators.forEach(Elevator::moveOneFloor);
-        elevators.forEach(elevator -> elevatorListeners.forEach(listener -> listener.onElevatorArrivedAtFloor(elevator)));
+        elevators.parallelStream().forEach(Elevator::moveOneFloor);
+        elevators.parallelStream().forEach(elevator -> elevatorListeners.parallelStream().forEach(listener -> listener.onElevatorArrivedAtFloor(elevator)));
     }
 }
