@@ -2,6 +2,7 @@ package org.togetherjava.event.elevator.humans;
 
 import org.togetherjava.event.elevator.elevators.ElevatorPanel;
 import org.togetherjava.event.elevator.elevators.FloorPanelSystem;
+import org.togetherjava.event.elevator.elevators.TravelDirection;
 
 import java.util.OptionalInt;
 import java.util.StringJoiner;
@@ -17,6 +18,8 @@ public final class Human implements ElevatorListener {
     private State currentState;
     private final int startingFloor;
     private final int destinationFloor;
+    private final TravelDirection desiredDirection;
+    private final Object lock = new Object();
     /**
      * If the human is currently inside an elevator, this is its unique ID.
      * Otherwise, this is {@code null} to indicate that the human is currently on the corridor.
@@ -36,19 +39,24 @@ public final class Human implements ElevatorListener {
         if (startingFloor <= 0 || destinationFloor <= 0) {
             throw new IllegalArgumentException("Floors must be at least 1");
         }
-
         this.startingFloor = startingFloor;
         this.destinationFloor = destinationFloor;
-
         currentState = State.IDLE;
+        if (startingFloor == destinationFloor) {
+            this.desiredDirection = TravelDirection.NONE;
+        } else {
+            this.desiredDirection = (destinationFloor > startingFloor) ? TravelDirection.UP : TravelDirection.DOWN;
+        }
     }
 
     public State getCurrentState() {
-        return currentState;
+        synchronized (lock) {
+            return currentState;
+        }
     }
 
     public int getStartingFloor() {
-        return startingFloor;
+       return startingFloor;
     }
 
     public int getDestinationFloor() {
@@ -57,36 +65,57 @@ public final class Human implements ElevatorListener {
 
     @Override
     public void onElevatorSystemReady(FloorPanelSystem floorPanelSystem) {
-        // TODO Implement. The system is now ready and the human should leave
-        //  their initial IDLE state, requesting an elevator by clicking on the buttons of
-        //  the floor panel system. The human will now enter the WAITING_FOR_ELEVATOR state.
-        System.out.println("Ready-event received");
+        synchronized (lock) {
+            currentState = State.WAITING_FOR_ELEVATOR;
+            floorPanelSystem.requestElevator(startingFloor, desiredDirection);
+        }
     }
 
     @Override
     public void onElevatorArrivedAtFloor(ElevatorPanel elevatorPanel) {
-        // TODO Implement. If the human is currently waiting for an elevator and
-        //  this event represents arrival at the humans current floor, the human can now enter the
-        //  elevator and request their actual destination floor. The state has to change to TRAVELING_WITH_ELEVATOR.
-        //  If the human is currently traveling with this elevator and the event represents
-        //  arrival at the human's destination floor, the human can now exit the elevator.
-        System.out.println("Arrived-event received");
+        synchronized (lock) {
+            if (currentState == State.WAITING_FOR_ELEVATOR && desiredDirection == TravelDirection.NONE) {
+                currentEnteredElevatorId = null;
+                currentState = State.ARRIVED;
+                return;
+            }
+            if (currentState.equals(State.WAITING_FOR_ELEVATOR)
+                    && elevatorPanel.getCurrentFloor() == startingFloor
+                /* or advertised direction equals TravelDirection.NONE part is needed here as advertised direction
+                can be none if this was the last stop of the existing queue but more people need to board still */
+                    && ((elevatorPanel.getAdvertisedDirection() == desiredDirection)
+                        || elevatorPanel.getAdvertisedDirection() == TravelDirection.NONE)) {
+                currentEnteredElevatorId = elevatorPanel.getId();
+                elevatorPanel.requestDestinationFloor(destinationFloor);
+                currentState = State.TRAVELING_WITH_ELEVATOR;
+            }
+            if (currentState.equals(State.TRAVELING_WITH_ELEVATOR)
+                    && elevatorPanel.getId() == currentEnteredElevatorId
+                    && elevatorPanel.getCurrentFloor() == destinationFloor) {
+                currentEnteredElevatorId = null;
+                currentState = State.ARRIVED;
+            }
+        }
     }
 
     public OptionalInt getCurrentEnteredElevatorId() {
-        return currentEnteredElevatorId == null
-                ? OptionalInt.empty()
-                : OptionalInt.of(currentEnteredElevatorId);
+        synchronized (lock) {
+            return currentEnteredElevatorId == null
+                    ? OptionalInt.empty()
+                    : OptionalInt.of(currentEnteredElevatorId);
+        }
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Human.class.getSimpleName() + "[", "]")
-                .add("currentState=" + currentState)
-                .add("startingFloor=" + startingFloor)
-                .add("destinationFloor=" + destinationFloor)
-                .add("currentEnteredElevatorId=" + currentEnteredElevatorId)
-                .toString();
+        synchronized (lock) {
+            return new StringJoiner(", ", Human.class.getSimpleName() + "[", "]")
+                    .add("currentState=" + currentState)
+                    .add("startingFloor=" + startingFloor)
+                    .add("destinationFloor=" + destinationFloor)
+                    .add("currentEnteredElevatorId=" + currentEnteredElevatorId)
+                    .toString();
+        }
     }
 
     public enum State {

@@ -1,7 +1,6 @@
 package org.togetherjava.event.elevator.elevators;
 
 import org.togetherjava.event.elevator.humans.ElevatorListener;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,17 +32,66 @@ public final class ElevatorSystem implements FloorPanelSystem {
 
     @Override
     public void requestElevator(int atFloor, TravelDirection desiredTravelDirection) {
-        // TODO Implement. This represents a human standing in the corridor,
-        //  requesting that an elevator comes to pick them up for travel into the given direction.
-        //  The system is supposed to make sure that an elevator will eventually reach this floor to pick up the human.
-        //  The human can then enter the elevator and request their actual destination within the elevator.
-        //  Ideally this has to select the best elevator among all which can reduce the time
-        //  for the human spending waiting (either in corridor or in the elevator itself).
-        System.out.println("Request for elevator received");
+        findNearestInDesiredDirection(elevators, atFloor, desiredTravelDirection).requestDestinationFloor(atFloor);
     }
 
     public void moveOneFloor() {
-        elevators.forEach(Elevator::moveOneFloor);
-        elevators.forEach(elevator -> elevatorListeners.forEach(listener -> listener.onElevatorArrivedAtFloor(elevator)));
+        elevators.parallelStream().forEach(Elevator::moveOneFloor);
+        elevators.parallelStream().forEach(elevator -> elevatorListeners.parallelStream().forEach(listener -> listener.onElevatorArrivedAtFloor(elevator)));
+    }
+
+    /**
+     * Helper method that finds the nearest elevator to a given floor in position to travel in the desired direction.
+     *
+     * @param elevators the list of elevators
+     * @param floor the desired floor (where the human resides)
+     * @param desiredDirection the desired TravelDirection
+     * @return elevator object representing the nearest in that direction OR a fallback to the nearest in general if
+     * none fit the direction criteria
+     */
+    private static Elevator findNearestInDesiredDirection(List<Elevator> elevators, int floor, TravelDirection desiredDirection) {
+        List<Elevator> directionMatchedElevators = new ArrayList<>();
+        for (Elevator e : elevators) {
+            if (desiredDirection == TravelDirection.DOWN) {
+                if (e.getCurrentFloor() > floor) {
+                    directionMatchedElevators.add(e);
+                }
+            } else if (desiredDirection == TravelDirection.UP) {
+                if (e.getCurrentFloor() < floor){
+                    directionMatchedElevators.add(e);
+                }
+            }
+        }
+        Elevator result;
+        if (!directionMatchedElevators.isEmpty()) {
+            result = findNearestElevator(directionMatchedElevators, floor);
+        } else {
+            result = findNearestElevator(elevators, floor);
+        }
+        if (result == null) {
+            throw new RuntimeException("Found no elevators < Integer.MAX_VALUE distance away from complete list of elevators!");
+        }
+        return result;
+    }
+
+    /**
+     * A helper method that returns the nearest elevator to the given floor.
+     * NOTE: Returned elevator can be {@code null} (be careful if list can be empty)
+     *
+     * @param elevators the list of elevators
+     * @param floor the floor you want to find the nearest elevator to
+     * @return the closest Elevator or null if none found
+     */
+    private static Elevator findNearestElevator(List<Elevator> elevators, int floor) {
+        Elevator nearest = null;
+        int nearestDistance = Integer.MAX_VALUE;
+        for (Elevator elevator : elevators) {
+            int distance = Math.abs(elevator.getCurrentFloor() - floor);
+            if (distance < nearestDistance) {
+                nearest = elevator;
+                nearestDistance = distance;
+            }
+        }
+        return nearest;
     }
 }
