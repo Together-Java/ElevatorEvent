@@ -64,6 +64,10 @@ public final class Simulation {
 
         return new Simulation(elevators, humans);
     }
+    public static Simulation createCustomSimulation() {
+        return new Simulation(List.of(new Elevator(1, 10, 10)),
+                List.of(new Human(2, 2),new Human(1, 2)));
+    }
 
     public Simulation(List<Elevator> elevators, List<Human> humans) {
         this.elevators = new ArrayList<>(elevators);
@@ -96,7 +100,6 @@ public final class Simulation {
 
     public void step() {
         elevatorSystem.moveOneFloor();
-
         humanStatistics.forEach(HumanStatistics::step);
         stepCount++;
     }
