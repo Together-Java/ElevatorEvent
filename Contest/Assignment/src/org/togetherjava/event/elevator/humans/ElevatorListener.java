@@ -25,4 +25,5 @@ public interface ElevatorListener {
      * relevant (i.e. humans that can enter the elevator).
      */
     void onElevatorArrivedAtFloor(ElevatorPanel elevatorPanel);
+
 }

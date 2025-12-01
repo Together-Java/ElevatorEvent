@@ -1,7 +1,9 @@
 package org.togetherjava.event.elevator.elevators;
 
-import java.util.StringJoiner;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static org.togetherjava.event.elevator.elevators.ElevatorSystem.mod;
 
 /**
  * A single elevator that can serve a given amount of floors.
@@ -16,6 +18,10 @@ public final class Elevator implements ElevatorPanel {
     private final int minFloor;
     private final int floorsServed;
     private int currentFloor;
+    private int numberOfHumansAboard;
+    private int humanExited;
+    private List<Integer> requestedDestinationFloors;
+    private TravelDirection travellingDirection;
 
     /**
      * Creates a new elevator.
@@ -37,6 +43,7 @@ public final class Elevator implements ElevatorPanel {
         this.minFloor = minFloor;
         this.currentFloor = currentFloor;
         this.floorsServed = floorsServed;
+        this.requestedDestinationFloors = new ArrayList<>();
     }
 
     @Override
@@ -57,12 +64,20 @@ public final class Elevator implements ElevatorPanel {
         return currentFloor;
     }
 
+    public TravelDirection getTravellingDirection() {
+        return travellingDirection;
+    }
+
     @Override
     public void requestDestinationFloor(int destinationFloor) {
         // TODO Implement. This represents a human or the elevator system
         //  itself requesting this elevator to eventually move to the given floor.
         //  The elevator is supposed to memorize the destination in a way that
         //  it can ensure to eventually reach it.
+        requestedDestinationFloors.add(destinationFloor);
+        if(destinationFloor > currentFloor) travellingDirection = TravelDirection.UP;
+        else if(destinationFloor < currentFloor) travellingDirection = TravelDirection.DOWN;
+        else travellingDirection = null;
         System.out.println("Request for destination floor received");
     }
 
@@ -76,7 +91,83 @@ public final class Elevator implements ElevatorPanel {
         //  meaning that the average time waiting (either in corridor or inside the elevator)
         //  is minimized across all humans.
         //  It is essential that this method updates the currentFloor field accordingly.
+        if(requestedDestinationFloors.isEmpty()) {
+            lastResort();
+            return;
+        }
+        sortingList();
+        int currentRequest = requestedDestinationFloors.getLast();
+        if(currentRequest > currentFloor) {
+            currentFloor++;
+            travellingDirection = TravelDirection.UP;
+        }
+        else if(currentRequest < currentFloor) {
+            currentFloor--;
+            travellingDirection = TravelDirection.DOWN;
+        }
+        else {
+            requestedDestinationFloors.removeLast();
+            removeRequests();
+        }
         System.out.println("Request to move a floor received");
+    }
+
+    /**
+     * It is possible that the requests ends for the current elevator but there are still humans onboard.
+     * In that case the paternoster is the last resort to make sure the humans onboard reach the destination floor.
+     */
+    private void lastResort() {
+        if(currentFloor == minFloor) travellingDirection = TravelDirection.UP;
+        else if(currentFloor == (minFloor + floorsServed -1)) travellingDirection = TravelDirection.DOWN;
+        else if(numberOfHumansAboard != 0) {
+            if(travellingDirection == TravelDirection.UP) currentFloor++;
+            else if(travellingDirection == TravelDirection.DOWN) currentFloor--;
+        }
+    }
+
+    /**
+     * For instance, a number of humans can exit to the current floor.
+     * But the request for the current floor can make the elevator come to the current floor again or stay at it for consecutive steps.
+     * To prevent such loss of steps, this method removes the number of request according to the number of humans exited.
+     */
+    private void removeRequests() {
+        for(int i = 0; i < humanExited; i++) {
+            for(int j = 0; j < requestedDestinationFloors.size(); j++) {
+                if(requestedDestinationFloors.get(j) == currentFloor) {
+                    requestedDestinationFloors.remove(j);
+                    humanExited--;
+                    j--;
+                }
+            }
+        }
+    }
+
+    /**
+     * To sort the list based on how far the requested floor is from the current floor
+     * The idea is to make the elevator go to the nearest or farthest request based on strategy.
+     */
+
+    private void sortingList() {
+        for(int i = 0; i < requestedDestinationFloors.size() - 1; i++) {
+            if(mod(requestedDestinationFloors.get(i) - currentFloor) < mod(requestedDestinationFloors.get(i+1)) - currentFloor) {
+                int temp = requestedDestinationFloors.get(i + 1);
+                requestedDestinationFloors.remove(i + 1);
+                requestedDestinationFloors.add(i + 1,requestedDestinationFloors.get(i));
+                requestedDestinationFloors.remove(i);
+                requestedDestinationFloors.add(i,temp);
+            }
+        }
+    }
+
+    @Override
+    public void enteredElevator() {
+        numberOfHumansAboard++;
+    }
+
+    @Override
+    public void exitedElevator() {
+        numberOfHumansAboard--;
+        humanExited++;
     }
 
     @Override
@@ -84,7 +175,7 @@ public final class Elevator implements ElevatorPanel {
         return new StringJoiner(", ", Elevator.class.getSimpleName() + "[", "]").add("id=" + id)
                 .add("minFloor=" + minFloor)
                 .add("floorsServed=" + floorsServed)
-                .add("currentFloor=" + currentFloor)
+                .add("currentFloor=" + this.currentFloor)
                 .toString();
     }
 }

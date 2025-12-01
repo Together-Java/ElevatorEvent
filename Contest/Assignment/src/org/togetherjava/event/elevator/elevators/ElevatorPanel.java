@@ -25,4 +25,15 @@ public interface ElevatorPanel {
      * @param destinationFloor the desired destination, must be within the range served by this elevator
      */
     void requestDestinationFloor(int destinationFloor);
+
+
+    /**
+     * Counts the number of humans exited the elevator and updates the number of humans aboard counter.
+     */
+    void exitedElevator();
+
+    /**
+     * Counts the number of humans entered the elevator.
+     */
+    void enteredElevator();
 }

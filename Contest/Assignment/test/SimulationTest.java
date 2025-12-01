@@ -41,7 +41,6 @@ final class SimulationTest {
 
         assertDoesNotThrow(() -> simulation.startAndExecuteUntilDone(stepLimit),
                 "Simulation obtained by 'Simulation.createSimpleSimulation()' was aborted because it could not finish in time.");
-
         simulationFailed = false;
     }
 
@@ -52,7 +51,6 @@ final class SimulationTest {
 
         assertDoesNotThrow(() -> simulation.startAndExecuteUntilDone(stepLimit),
                 "Simulation obtained by 'Simulation.createRandomSimulation(1, 5, 50, 10)' was aborted because it could not finish in time.");
-
         simulationFailed = false;
     }
 
@@ -61,17 +59,17 @@ final class SimulationTest {
         Simulation simulation = Simulation.createRandomSimulation(2, 20, 1_000, 50);
         int stepLimit = 10_000;
 
+
         assertDoesNotThrow(() -> simulation.startAndExecuteUntilDone(stepLimit),
                 "Simulation obtained by 'Simulation.createRandomSimulation(2, 20, 1_000, 50)' was aborted because it could not finish in time.");
-
         simulationFailed = false;
+
     }
 
     @Test
     void testRandomSimulationBig() {
         Simulation simulation = Simulation.createRandomSimulation(3, 100, 100_000, 100);
         int stepLimit = 100_000;
-
         assertDoesNotThrow(() -> simulation.startAndExecuteUntilDone(stepLimit),
                 "Simulation obtained by 'Simulation.createRandomSimulation(3, 100, 100_000, 100)' was aborted because it could not finish in time.");
 
